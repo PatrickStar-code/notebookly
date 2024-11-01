@@ -5,22 +5,21 @@ import Spline from '@splinetool/react-spline/next';
 
 export default function Login() {
   return (
-<div className="h-screen bg-gray-50 flex justify-center items-center">
+<div className="h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
   <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-4 lg:space-y-0 lg:space-x-8">
     {/* Coluna da Imagem */}
     <div className="hidden lg:flex justify-center items-center">
       {/* Imagem aqui */}
       <Spline
         scene="https://prod.spline.design/HN-AKwGLre7mON3R/scene.splinecode" 
-        width={300}
-        height={300}
+     
       />
       
     </div>
 
     {/* Coluna do Formulário */}
     <div className="flex flex-col items-center space-y-4">
-      <div className="bg-white border border-gray-300 w-80 py-8 flex flex-col items-center">
+      <div className="bg-white border border-gray-300 w-80 py-8 flex flex-col items-center ">
       <Image src="/logo.png" alt="Imagem" width={240} height={240} />
         <LoginForm />
 
@@ -44,7 +43,5 @@ export default function Login() {
     </div>
   </div>
 </div>
-
-
   );
 }
