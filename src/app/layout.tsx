@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <div className="h-12 fixed left-2 bottom-0">
+        <div className="h-12 fixed right-2 top-2">
           <ToggleButtom />
         </div>
       </body>

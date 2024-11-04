@@ -48,7 +48,7 @@ export default function LoginForm() {
 
         if(data.email === "teste@gmail.com" && data.password === "123456") {
             console.log("Logado com sucesso!");
-            router.push('/app')
+            router.push('/Main')
         }
 
         setErrorToasts([]);
