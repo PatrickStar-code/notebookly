@@ -9,12 +9,11 @@ import {
   IconTerminal2,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import { ILink } from "../Main/layout";
+import { ILink } from "../main/layout";
 
-export function FloatingDockDemo({links}: {links: ILink[]}) {
-
+export function FloatingDockDemo({ links }: { links: ILink[] }) {
   return (
-    <div className="flex items-center justify-center h-[35rem] ">
+    <div className="flex items-center  justify-center h-[35rem] ">
       <FloatingDock items={links} />
     </div>
   );

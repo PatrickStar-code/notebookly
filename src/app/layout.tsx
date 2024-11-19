@@ -1,25 +1,20 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Edu_NSW_ACT_Foundation } from "next/font/google";
 import "./globals.css";
-import ToggleButtom from "./components/toggleButtom";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import ToggleButtom from "./_components/toggleButtom";
 
 export const metadata: Metadata = {
   title: "Notebookly",
   description: "Notebookly",
 };
 
-export default function RootLayout({
+const edu = Edu_NSW_ACT_Foundation({
+  subsets: ["latin"],
+  variable: "--font-edu",
+});
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -29,11 +24,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${edu.variable} antialiased`}>
         {children}
-        <div className="h-12 fixed right-2 top-2">
+        <div className="h-12 fixed right-2 bottom-2">
           <ToggleButtom />
         </div>
       </body>

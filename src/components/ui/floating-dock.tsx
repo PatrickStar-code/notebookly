@@ -24,7 +24,7 @@ const FloatingDockMobile = ({
   return (
     <motion.div
       className={cn(
-        "fixed bottom-4 inset-x-0 mx-auto flex h-16 max-w-xs gap-4 items-center justify-center rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 md:hidden",
+        "fixed bottom-4 inset-x-0 mx-auto flex h-16 max-w-xs gap-4 items-center justify-center rounded-2xl bg-gray-50 dark:bg-gray-900 px-4 md:hidden",
         className
       )}
     >

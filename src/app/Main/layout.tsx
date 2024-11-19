@@ -1,21 +1,22 @@
-import React from 'react'
-import { FloatingDockDemo } from '../components/dock'
-import Sidebar from '../components/sidebar'
-import { link } from 'fs'
-import { IconHome, IconNewSection, IconTerminal2 } from '@tabler/icons-react'
+import React from "react";
 
-export    interface ILink {
+import { link } from "fs";
+import { IconHome, IconNewSection, IconTerminal2 } from "@tabler/icons-react";
+import { FloatingDockDemo } from "../_components/dock";
+import Sidebar from "../_components/sidebar";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+
+export interface ILink {
   title: string;
   icon: React.ReactNode;
   href: string;
 }
 
-
-export default function PagesLayout({children}: Readonly<{children: React.ReactNode}>) {
-
-
-
-  const links : ILink[] = [
+export default async function PagesLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  const links: ILink[] = [
     {
       title: "Home",
       icon: (
@@ -36,20 +37,23 @@ export default function PagesLayout({children}: Readonly<{children: React.ReactN
         <IconNewSection className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),
       href: "#",
-    }
-  ]
+    },
+  ];
+
+  const session = await auth();
+  if (!session) {
+    return redirect("/");
+  }
 
   return (
     <div className="flex">
-      <Sidebar links={links}/>
-      <div className="flex-grow p-6 bg-gray-100 dark:bg-gray-700">
-        <h2 className="text-2xl">Conteúdo Principal</h2>
-        <p>Este é o conteúdo principal do aplicativo.</p>
-   
+      <Sidebar links={links} />
+      <div className="flex-grow p-6 bg-gray-100 h-screen w-screen dark:bg-gray-700">
+        {children}
         <div className="block sm:hidden">
-          <FloatingDockDemo links={links}/>
+          <FloatingDockDemo links={links} />
         </div>
       </div>
     </div>
-  )
+  );
 }

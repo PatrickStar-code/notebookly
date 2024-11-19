@@ -5,8 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { easeIn } from "framer-motion/dom";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
+import Login from "../_actions/login";
+import { hashSync } from "bcrypt-ts";
 
 const schema = z.object({
   email: z
@@ -18,12 +19,12 @@ const schema = z.object({
     .min(6, { message: "A senha deve ter pelo menos 6 caracteres" }),
 });
 
-type FormData = z.infer<typeof schema>;
+export type FormDataLogin = z.infer<typeof schema>;
 
 export default function LoginForm() {
-    const router = useRouter()
+  const router = useRouter();
 
-    const [errorToasts, setErrorToasts] = useState<string[]>([]);
+  const [errorToasts, setErrorToasts] = useState<string[]>([]);
 
   const {
     register,
@@ -31,7 +32,7 @@ export default function LoginForm() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<FormDataLogin>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
@@ -39,22 +40,14 @@ export default function LoginForm() {
     },
   });
 
-  const Submit = async (data: FormData) => {
+  const Submit = async (data: FormDataLogin) => {
     try {
-        const validatedData = await schema.parseAsync(data);
-        console.log("Dados validados:", validatedData);
+      const validatedData = await schema.parseAsync(data);
+      reset();
+      Login(validatedData);
 
-        reset();
-
-        if(data.email === "teste@gmail.com" && data.password === "123456") {
-            console.log("Logado com sucesso!");
-            router.push('/Main')
-        }
-
-        setErrorToasts([]);
-      } catch (error) {
-        
-      }
+      setErrorToasts([]);
+    } catch (error) {}
   };
 
   return (
@@ -83,15 +76,14 @@ export default function LoginForm() {
       <button className="text-sm text-center bg-blue-200 py-2 rounded-[0.4em] border-2 border-black font-extrabold text-black shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em]">
         Entrar
       </button>
-      
+
       {errors.email && (
         <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
-      ) }
+      )}
 
       {errors.password && (
         <p className="text-red-500 text-sm mt-2">{errors.password.message}</p>
-      ) }
-</form>
-
+      )}
+    </form>
   );
 }
