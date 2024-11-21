@@ -2,6 +2,8 @@ import React from "react";
 import { div, h1 } from "framer-motion/client";
 import { Button } from "@/components/ui/button";
 import { PencilIcon, PencilLine } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import NotepadCard from "../_components/card";
 
 export default function Home() {
   return (
@@ -13,6 +15,9 @@ export default function Home() {
         <Button variant={"outline"}>
           Cliar nova nota <PencilLine size={16} />
         </Button>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        <NotepadCard />
       </div>
     </>
   );
