@@ -18,16 +18,14 @@ export const {
                 const email = credentials?.email as string;
                 const password = credentials?.password as string;
                 if (!email || !password) {
-                    // Retorna null caso os campos não estejam preenchidos
                     return null;
                 }
 
-                const user = await db.user.findUnique({
+                const user = await db.userModel.findUnique({
                     where: { email: email },
                 });
 
                 if (!user) {
-                    // Retorna null caso o usuário não seja encontrado
                     return null;
                 }
 
@@ -37,11 +35,9 @@ export const {
                 );
 
                 if (!isPasswordCorrect) {
-                    // Retorna null se a senha estiver incorreta
                     return null;
                 }
 
-                // Retorna os dados do usuário autenticado
                 return {
                     id: user.id,
                     name: user.name,
@@ -50,9 +46,13 @@ export const {
             },
         }),
     ],
+    session: {
+        strategy: "jwt", // "jwt" mantém a sessão no token
+        maxAge: 7 * 24 * 60 * 60, // 7 dias em segundos
+        updateAge: 24 * 60 * 60, // Atualiza o token a cada 24 horas
+    },
     callbacks: {
         async session({ session, token }) {
-            // Adiciona o ID do usuário na sessão
             if (token?.id) {
                 session.user.id = token.id as string;
             }
@@ -69,5 +69,5 @@ export const {
         signIn: "/",
         signOut: "/logout",
     },
-    secret: process.env.NEXTAUTH_SECRET, // Certifique-se de configurar isso no .env
+    secret: process.env.NEXTAUTH_SECRET,
 });

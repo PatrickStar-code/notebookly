@@ -10,7 +10,7 @@ export default async function registerUser(data: FormDataRegister) {
     const email = data.email;
     const password = data.password;
 
-    const user = await db.user.create({ data: { name, email, password } }).catch(console.log);
+    const user = await db.userModel.create({ data: { name, email, password } }).catch(console.log);
 
     if (!user) throw new Error("Erro ao cadastrar o usuário.");
 
