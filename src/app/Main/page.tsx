@@ -1,12 +1,11 @@
 import React from "react";
-import { div, h1 } from "framer-motion/client";
 import { Button } from "@/components/ui/button";
-import { PencilIcon, PencilLine, Plus } from "lucide-react";
-import { Card } from "@/components/ui/card";
+
 import NotepadCard from "../_components/card";
 import db from "@/lib/db";
 import { auth } from "@/auth";
 import { DialogNewNoteboock } from "../_components/dialogNewNotebook";
+import { Plus } from "lucide-react";
 
 export default async function Home() {
   const session = await auth();
