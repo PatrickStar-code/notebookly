@@ -6,6 +6,7 @@ import { FloatingDockDemo } from "../_components/dock";
 import Sidebar from "../_components/sidebar";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { LogOutIcon } from "lucide-react";
 
 export interface ILink {
   title: string;
@@ -33,6 +34,13 @@ export default async function PagesLayout({
     },
     {
       title: "Components",
+      icon: (
+        <IconNewSection className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "#",
+    },
+    {
+      title: "Settings",
       icon: (
         <IconNewSection className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),

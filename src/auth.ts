@@ -7,6 +7,7 @@ export const {
     handlers: { GET, POST },
     auth,
     signIn,
+    signOut,
 } = NextAuth({
     providers: [
         CredentialsProvider({
@@ -48,7 +49,7 @@ export const {
     ],
     session: {
         strategy: "jwt", // "jwt" mantém a sessão no token
-        maxAge: 7 * 24 * 60 * 60, // 7 dias em segundos
+        maxAge: 24 * 60 * 60, // 24 horas em segundos
         updateAge: 24 * 60 * 60, // Atualiza o token a cada 24 horas
     },
     callbacks: {

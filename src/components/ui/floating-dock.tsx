@@ -1,7 +1,9 @@
 "use client";
 
+import logout from "@/app/_actions/logout";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
 export const FloatingDock = ({
@@ -31,6 +33,14 @@ const FloatingDockMobile = ({
       {items.map((item) => (
         <IconContainer key={item.title} {...item} />
       ))}
+      <div
+        className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+        onClick={() => {
+          logout();
+        }}
+      >
+        <LogOutIcon size={16} />
+      </div>{" "}
     </motion.div>
   );
 };

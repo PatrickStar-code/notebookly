@@ -1,12 +1,12 @@
-import { Notebook, Pencil } from "lucide-react";
+import { Notebook } from "lucide-react";
 import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
+  // CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import SentimentalBadge from "./badge";
+// import SentimentalBadge from "./badge";
 import { NotebookModel } from "@prisma/client";
 
 export default function NotepadCard(props: NotebookModel) {
