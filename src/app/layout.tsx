@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Edu_NSW_ACT_Foundation } from "next/font/google";
 import "./globals.css";
 import ToggleButtom from "./_components/toggleButtom";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Notebookly",
