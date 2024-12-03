@@ -17,6 +17,16 @@ const schema = z.object({
   password: z
     .string()
     .min(6, { message: "A senha deve ter pelo menos 6 caracteres" }),
+  image: z
+    .string()
+    .optional()
+    .refine(
+      (url) => url === undefined || url === "" || /(http|https):\/\//.test(url),
+      {
+        message:
+          "A URL precisa começar com http ou https, ou pode ser deixada em branco.",
+      }
+    ),
 });
 
 export type FormDataRegister = z.infer<typeof schema>;
@@ -34,6 +44,7 @@ export default function RegisterForm() {
       user: "",
       email: "",
       password: "",
+      image: "",
     },
   });
 
@@ -76,6 +87,17 @@ export default function RegisterForm() {
           id="usuario"
           {...register("user")}
           placeholder="Usuario"
+          type="text"
+          required
+        />
+        <input
+          autoFocus
+          className={`text-xs w-full mb-2  bg-white px-2 py-2 rounded-[0.4em] border-2 border-black font-bold text-gray-700 shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-[0.15em_0.15em] focus:translate-x-[-0.05em] focus:translate-y-[-0.05em] hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em] ${
+            errors.user ? "border-red-500" : "border-black"
+          }`}
+          id="imagem"
+          {...register("image")}
+          placeholder="Url;"
           type="text"
           required
         />

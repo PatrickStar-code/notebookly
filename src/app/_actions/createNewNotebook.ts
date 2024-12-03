@@ -2,8 +2,10 @@
 
 import { auth } from "@/auth";
 import db from "@/lib/db";
+import { FormDataNewNotebook } from "../_components/dialogNewNotebook";
+import { revalidatePath } from "next/cache";
 
-export default async function CreateNewNotebook() {
+export default async function CreateNewNotebook(data: FormDataNewNotebook) {
     const session = await auth();
 
     if (!session) {
@@ -12,13 +14,11 @@ export default async function CreateNewNotebook() {
 
     const notebook = await db.notebookModel.create({
         data: {
-            title: "Novo Caderno",
+            title: data.title,
             userId: session.user?.id as string,
-            image: "",
+            image: data.image,
         },
     });
-
+    revalidatePath("/main");
     return notebook;
-    console.log(notebook);
-
 }

@@ -18,13 +18,13 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex items-center   justify-between">
+      <div className="flex items-center  ">
         <h1 className="md:text-8xl font-serif text-4xl text-center  font-edu">
-          Bem vindo(a)!, {session?.user?.name}
+          Bem vindo(a)!
         </h1>
         <DialogNewNoteboock
           trigger={
-            <Button variant={"outline"}>
+            <Button variant={"outline"} className="fixed right-8 z-40">
               Criar Caderno <Plus size={16} />
             </Button>
           }

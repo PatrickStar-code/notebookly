@@ -26,7 +26,7 @@ export default async function RootLayout({
       </head>
       <body className={`${edu.variable} antialiased`}>
         {children}
-        <div className="h-12 fixed right-2 bottom-2">
+        <div className="h-12 fixed right-2 lg:right-8 bottom-2">
           <ToggleButtom />
         </div>
       </body>

@@ -1,12 +1,10 @@
 import React from "react";
 
-import { link } from "fs";
 import { IconHome, IconNewSection, IconTerminal2 } from "@tabler/icons-react";
 import { FloatingDockDemo } from "../_components/dock";
 import Sidebar from "../_components/sidebar";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { LogOutIcon } from "lucide-react";
 
 export interface ILink {
   title: string;
@@ -23,7 +21,7 @@ export default async function PagesLayout({
       icon: (
         <IconHome className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/main",
     },
     {
       title: "Products",
@@ -54,9 +52,14 @@ export default async function PagesLayout({
   }
 
   return (
-    <div className="flex">
-      <Sidebar links={links} />
-      <div className="flex-grow p-6 bg-gray-100 h-screen w-screen dark:bg-gray-700">
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar
+        links={links}
+        userName={session?.user?.name ? session.user.name : "Nome Padrão"}
+        userImage={session?.user?.image ? session.user.image : ""} // imagem vazia se não houver
+      />
+
+      <div className="flex-grow p-6 bg-gray-100 dark:bg-gray-700 overflow-y-auto">
         {children}
         <div className="block sm:hidden">
           <FloatingDockDemo links={links} />

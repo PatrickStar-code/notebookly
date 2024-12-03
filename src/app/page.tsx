@@ -4,14 +4,16 @@ import Spline from "@splinetool/react-spline/next";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import DialogResetPassword from "./_components/dialogResetPassword";
 
 export default async function Login() {
   const session = await auth();
   if (session) {
     return redirect("/main");
   }
+
   return (
-    <div className="h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
+    <div className="h-full bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
       <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-4 lg:space-y-0 lg:space-x-8">
         {/* Coluna da Imagem */}
         <div className="hidden lg:flex justify-center items-center">
@@ -37,9 +39,13 @@ export default async function Login() {
               <span>Entrar com o Google</span>
             </button>
 
-            <a className="text-xs text-blue-900 mt-4 cursor-pointer">
-              Esqueceu a senha?
-            </a>
+            <DialogResetPassword
+              trigger={
+                <p className="text-xs text-blue-900 mt-4 cursor-pointer">
+                  Esqueceu a senha?
+                </p>
+              }
+            />
           </div>
 
           <div className="bg-white border border-gray-300 text-center text-black w-80 py-4">
