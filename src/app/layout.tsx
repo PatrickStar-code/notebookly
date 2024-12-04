@@ -24,7 +24,7 @@ export default async function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" />
       </head>
-      <body className={`${edu.variable} antialiased`}>
+      <body className={`${edu.variable} antialiased h-screen`}>
         {children}
         <div className="h-12 fixed right-2 lg:right-8 bottom-2">
           <ToggleButtom />

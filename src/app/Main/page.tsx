@@ -6,6 +6,7 @@ import db from "@/lib/db";
 import { auth } from "@/auth";
 import { DialogNewNoteboock } from "../_components/dialogNewNotebook";
 import { Plus } from "lucide-react";
+import { ToastContainer } from "react-toastify";
 
 export default async function Home() {
   const session = await auth();
@@ -13,6 +14,9 @@ export default async function Home() {
   const notebooks = await db.notebookModel.findMany({
     where: {
       userId: session?.user?.id,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 
@@ -35,6 +39,17 @@ export default async function Home() {
           <NotepadCard {...notebook} key={notebook.id} />
         ))}
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 }
