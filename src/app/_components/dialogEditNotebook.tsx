@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +19,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { NotebookModel } from "@prisma/client";
 import EditNotebook from "../_actions/editNotebook";
+import DrawnButton from "./drawnButton";
 
 const schema = z.object({
   title: z.string().min(1, { message: "O titulo deve ser informado." }),
@@ -113,9 +113,9 @@ export function DialogEditNoteboock({
             <DialogFooter className="flex mt-4 justify-start ">
               {errors.image && <span>{errors.image.message}</span>}
 
-              <Button type="submit" variant="default">
+              <DrawnButton type="submit" variant="primary">
                 {loading ? "Editando..." : "Editar"}
-              </Button>
+              </DrawnButton>
             </DialogFooter>
           </form>
         </DialogContent>

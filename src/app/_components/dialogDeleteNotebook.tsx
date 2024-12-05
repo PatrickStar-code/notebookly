@@ -13,6 +13,8 @@ import { Trash2, XCircle } from "lucide-react";
 import { DialogClose } from "@radix-ui/react-dialog";
 // import { toast } from "react-toastify";
 import DeleteNotebook from "../_actions/deleteNotebook";
+import { toast } from "react-toastify";
+import DrawnButton from "./drawnButton";
 
 export default function DialogDeleteNotebook({
   trigger,
@@ -23,11 +25,18 @@ export default function DialogDeleteNotebook({
 }) {
   const [loading, setLoading] = useState(false);
   async function deleteNotebook(notebookId: string) {
+    const isDark = document.documentElement.classList.contains("dark");
     try {
       setLoading(true);
       await DeleteNotebook(notebookId);
-    } catch (error) {
-      console.log(error);
+      toast.success("Deletado caderno com sucesso!", {
+        theme: isDark ? "dark" : "light",
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.message, {
+        theme: isDark ? "dark" : "light",
+      });
     } finally {
       setLoading(false);
     }
@@ -55,32 +64,27 @@ export default function DialogDeleteNotebook({
         </div>
 
         {/* Rodapé com Botões */}
-        <DialogFooter className="flex mt-6 justify-center space-x-4">
+        <DialogFooter className="md:flex flex-col mt-6 justify-center gap-2 w-full">
           <DialogClose asChild>
-            <button
-              onClick={() => console.log("Cancelado")}
-              className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-black dark:text-white px-4 py-2 rounded font-semibold transition"
-            >
+            <DrawnButton variant="cancel" className="w-full">
               <XCircle className="inline w-5 h-5 mr-1" />
               Cancelar
-            </button>
+            </DrawnButton>
           </DialogClose>
-          <button
+          <DrawnButton
             onClick={() => deleteNotebook(CardProps.id)}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded font-semibold transition"
+            variant="danger"
+            className="w-full"
           >
             {loading ? (
-              <span>
-                <Trash2 className="inline w-5 h-5 mr-1" />
-                Deletando...
-              </span>
+              <span>Deletando...</span>
             ) : (
               <span>
                 <Trash2 className="inline w-5 h-5 mr-1" />
                 Deletar
               </span>
             )}
-          </button>
+          </DrawnButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

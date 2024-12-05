@@ -1,12 +1,12 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 
-import NotepadCard from "../_components/card";
 import db from "@/lib/db";
 import { auth } from "@/auth";
 import { DialogNewNoteboock } from "../_components/dialogNewNotebook";
 import { Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
+import DrawnButton from "../_components/drawnButton";
+import NotebookCard from "../_components/cardNotebook";
 
 export default async function Home() {
   const session = await auth();
@@ -28,15 +28,18 @@ export default async function Home() {
         </h1>
         <DialogNewNoteboock
           trigger={
-            <Button variant={"outline"} className="fixed right-8 z-40">
+            <DrawnButton
+              variant="outline"
+              className="fixed  flex  items-center  gap-2 right-8 z-40"
+            >
               Criar Caderno <Plus size={16} />
-            </Button>
+            </DrawnButton>
           }
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {notebooks.map((notebook) => (
-          <NotepadCard {...notebook} key={notebook.id} />
+          <NotebookCard {...notebook} key={notebook.id} />
         ))}
       </div>
       <ToastContainer

@@ -5,16 +5,10 @@ import Image from "next/image";
 import { DialogEditNoteboock } from "./dialogEditNotebook";
 import DialogDeleteNotebook from "./dialogDeleteNotebook";
 import DrawnButton from "./drawnButton";
+import Link from "next/link";
+import UseformatDateToPortuguese from "../hooks/useFormateToPortuguese";
 
-function formatDateToPortuguese(date: Date) {
-  return new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(date);
-}
-
-export default function NotepadCard(props: NotebookModel) {
+export default function NotebookCard(props: NotebookModel) {
   return (
     <div className="flex justify-center p-4">
       <Card className="w-full sm:w-96 bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-lg hover:scale-105">
@@ -45,23 +39,25 @@ export default function NotepadCard(props: NotebookModel) {
         <div className="flex justify-between text-xs text-gray-400 mt-4 dark:text-gray-300">
           <div>
             <div>Criado em:</div>
-            <div>{formatDateToPortuguese(props.createdAt)}</div>
+            <div>{UseformatDateToPortuguese(props.createdAt)}</div>
           </div>
           <div>
             <div>Editado em:</div>
-            <div>{formatDateToPortuguese(props.updatedAt)}</div>
+            <div>{UseformatDateToPortuguese(props.updatedAt)}</div>
           </div>
         </div>
 
         {/* Botão Ver/Editar */}
         <CardFooter className="flex justify-between mt-6 space-x-2">
           <div className="flex gap-4">
-            <button className="text-sm text-center px-8 bg-blue-200 hover:bg-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 py-2 rounded-[0.4em] border-2 border-black dark:border-gray-700 font-extrabold text-black dark:text-white shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em]">
-              Ver
-            </button>
+            <Link href={`main/notebook/${props.id}`}>
+              <button className="text-sm text-center px-8 bg-blue-200 hover:bg-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 py-2 rounded-[0.4em] border-2 border-black dark:border-gray-700 font-extrabold text-black dark:text-white shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em]">
+                Ver
+              </button>
+            </Link>
             <DialogEditNoteboock
               trigger={
-                <DrawnButton variant="primary" className="px-8">
+                <DrawnButton variant="primary" className="px-4">
                   Editar
                 </DrawnButton>
               }
@@ -75,7 +71,6 @@ export default function NotepadCard(props: NotebookModel) {
               <DrawnButton
                 variant="danger"
                 rounded
-                className="p-2"
                 icon={
                   <Trash
                     size={24}

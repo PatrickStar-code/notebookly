@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +18,7 @@ import { useForm } from "react-hook-form";
 import CreateNewNotebook from "../_actions/createNewNotebook";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import DrawnButton from "./drawnButton";
 
 const schema = z.object({
   title: z.string().min(1, { message: "O titulo deve ser informado." }),
@@ -105,9 +105,9 @@ export function DialogNewNoteboock({ trigger }: { trigger: React.ReactNode }) {
             <DialogFooter className="flex mt-4 justify-start ">
               {errors.image && <span>{errors.image.message}</span>}
 
-              <Button type="submit" variant="default">
+              <DrawnButton type="submit" variant="primary" className="p-2 px-4">
                 {loading ? "Criando..." : "Criar"}
-              </Button>
+              </DrawnButton>
             </DialogFooter>
           </form>
         </DialogContent>
