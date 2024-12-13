@@ -29,11 +29,36 @@ model NotebookModel {
   user      UserModel   @relation(fields: [userId], references: [id])
 }
 
+enum NoteEmotion {
+  HAPPY       // Feliz
+  SAD         // Triste
+  EXCITED     // Animado
+  ANXIOUS     // Ansioso
+  CALM        // Calmo
+  GRATEFUL    // Grato
+  TIRED       // Cansado
+  MOTIVATED   // Motivado
+  FRUSTRATED  // Frustrado
+  LONELY      // Solitário
+  PROUD       // Orgulhoso
+  RELAXED     // Relaxado
+  INSPIRED    // Inspirado
+  CONFUSED    // Confuso
+  NOSTALGIC   // Nostálgico
+  ANGRY       // Irritado
+  BORED       // Entediado
+  STRESSED    // Estressado
+  HOPEFUL     // Esperançoso
+  CURIOUS     // Curioso
+  NEUTRAL     // Neutro
+}
+
 model NoteModel {
   id         String        @id @default(cuid())
   title      String
-  content    String
   notebookId String
+  image      String 
+  Emotion    NoteEmotion
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @default(now()) @updatedAt
   notebook   NotebookModel @relation(fields: [notebookId], references: [id])

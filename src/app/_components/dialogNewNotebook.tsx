@@ -95,7 +95,7 @@ export function DialogNewNoteboock({ trigger }: { trigger: React.ReactNode }) {
               <div className="grid flex-1 gap-2">
                 <Label htmlFor="img">Url Imagem</Label>
                 <Input
-                  className={"${errors.image ? 'border-red-500' : ''}"}
+                  className={`${errors.image ? "border-red-500" : ""}`}
                   id="img"
                   {...register("image")}
                   placeholder="Digite a url"
