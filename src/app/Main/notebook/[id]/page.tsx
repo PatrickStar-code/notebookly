@@ -24,8 +24,6 @@ export default async function NotesPage({
     {}
   );
 
-  console.log("teste emotions", emotionCounts);
-
   return (
     <div className="space-y-6">
       {/* Cabeçalho do Caderno */}
@@ -59,59 +57,61 @@ export default async function NotesPage({
       </div>
 
       {/* Seção de Sentimentos */}
-      <Card className="bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg">
-        <CardHeader>
-          <CardTitle className="text-center text-2xl font-semibold text-gray-800 dark:text-gray-100">
-            Distribuição de Sentimentos
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-wrap gap-4 justify-center">
-          {Object.entries(emotionCounts).map(([emotion, count]) => (
-            <div
-              key={emotion}
-              className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-md space-y-2 w-36"
-            >
-              {/* Emote acima */}
-              <span className="text-3xl">
-                {
-                  emotionTranslations[
+      {data.notes.length > 0 && (
+        <Card className="bg-gray-50 dark:bg-gray-900 shadow-lg rounded-lg">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl font-semibold text-gray-800 dark:text-gray-100">
+              Distribuição de Sentimentos
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-4 justify-center">
+            {Object.entries(emotionCounts).map(([emotion, count]) => (
+              <div
+                key={emotion}
+                className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-md space-y-2 w-36"
+              >
+                {/* Emote acima */}
+                <span className="text-3xl">
+                  {
+                    emotionTranslations[
+                      emotion as keyof typeof emotionTranslations
+                    ].split(" ")[0]
+                  }
+                </span>
+                {/* Texto abaixo */}
+                <span
+                  className={`capitalize text-lg font-medium text-center ${
+                    count > 0
+                      ? "text-gray-800 dark:text-gray-100"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {emotionTranslations[
                     emotion as keyof typeof emotionTranslations
-                  ].split(" ")[0]
-                }
-              </span>
-              {/* Texto abaixo */}
-              <span
-                className={`capitalize text-lg font-medium text-center ${
-                  count > 0
-                    ? "text-gray-800 dark:text-gray-100"
-                    : "text-gray-400"
-                }`}
-              >
-                {emotionTranslations[
-                  emotion as keyof typeof emotionTranslations
-                ]
-                  .split(" ")
-                  .slice(1)
-                  .join(" ")}
-              </span>
-              {/* Porcentagem */}
-              <span
-                className={`inline-flex items-center justify-center px-3 py-1 text-sm font-medium rounded-full ${
-                  count > 0
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-400 text-gray-200"
-                }`}
-              >
-                {Math.round((count / data.notes.length) * 100)}%
-              </span>
-              {/* Contagem de notas */}
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                {count} nota{count !== 1 ? "s" : ""}
-              </span>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+                  ]
+                    .split(" ")
+                    .slice(1)
+                    .join(" ")}
+                </span>
+                {/* Porcentagem */}
+                <span
+                  className={`inline-flex items-center justify-center px-3 py-1 text-sm font-medium rounded-full ${
+                    count > 0
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-400 text-gray-200"
+                  }`}
+                >
+                  {Math.round((count / data.notes.length) * 100)}%
+                </span>
+                {/* Contagem de notas */}
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {count} nota{count !== 1 ? "s" : ""}
+                </span>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
 
       {/* Seção de Notas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-4 lg:gap-0">
