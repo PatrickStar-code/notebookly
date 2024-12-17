@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 export default async function registerPage() {
   const session = await auth();
   if (session) {
-    return redirect("/main");
+    return redirect("/Main");
   }
   return (
     <div className="h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">

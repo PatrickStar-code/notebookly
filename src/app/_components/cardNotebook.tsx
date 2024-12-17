@@ -50,7 +50,7 @@ export default function NotebookCard(props: NotebookModel) {
         {/* Botão Ver/Editar */}
         <CardFooter className="flex justify-between mt-6 space-x-2">
           <div className="flex gap-4">
-            <Link href={`main/notebook/${props.id}`}>
+            <Link href={`Main/notebook/${props.id}`}>
               <button className="text-sm text-center px-8 bg-blue-200 hover:bg-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 py-2 rounded-[0.4em] border-2 border-black dark:border-gray-700 font-extrabold text-black dark:text-white shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em]">
                 Ver
               </button>

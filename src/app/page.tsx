@@ -9,7 +9,7 @@ import DialogResetPassword from "./_components/dialogResetPassword";
 export default async function Login() {
   const session = await auth();
   if (session) {
-    return redirect("/main");
+    return redirect("/Main");
   }
 
   return (

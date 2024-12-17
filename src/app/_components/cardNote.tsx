@@ -44,7 +44,7 @@ export default function NoteCard(props: NoteModel) {
       <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         {/* Botão Ver */}
 
-        <Link href={`/main/note/${props.id}`}>
+        <Link href={`/Main/note/${props.id}`}>
           <Button
             className="bg-blue-500/90 hover:bg-blue-500/70 text-white p-2 rounded-full shadow-md"
             variant="ghost"

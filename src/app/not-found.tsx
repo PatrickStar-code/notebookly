@@ -53,7 +53,7 @@ export default function Custom404() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href={"/main"}>
+              <Link href={"/Main"}>
                 <DrawnButton className="p-4">
                   Voltar para a página anterior
                 </DrawnButton>

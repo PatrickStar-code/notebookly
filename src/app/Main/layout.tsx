@@ -21,7 +21,7 @@ export default async function PagesLayout({
       icon: (
         <IconHome className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/main",
+      href: "/Main",
     },
     {
       title: "Products",
