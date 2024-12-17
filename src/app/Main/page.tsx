@@ -47,11 +47,39 @@ export default async function Home() {
           }
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 sm:mt-8 md:mt-10">
-        {notebooks.map((notebook) => (
-          <NotebookCard {...notebook} key={notebook.id} />
-        ))}
-      </div>
+      {notebooks.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 sm:mt-8 md:mt-10">
+          {notebooks.map((notebook) => (
+            <NotebookCard {...notebook} key={notebook.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center h-[70vh] text-center">
+          <img
+            src="/images/empty.gif"
+            alt="No notebooks"
+            className="w-48 h-48 mb-4"
+          />
+          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-500">
+            Nenhum caderno encontrado.
+          </p>
+          <p className="text-lg text-gray-400 mt-2">
+            Que tal criar o seu primeiro caderno agora?
+          </p>
+          <div className="mt-6">
+            <DialogNewNoteboock
+              trigger={
+                <DrawnButton
+                  variant="primary"
+                  className="flex items-center gap-2"
+                >
+                  Criar Caderno <Plus size={18} />
+                </DrawnButton>
+              }
+            />
+          </div>
+        </div>
+      )}
       <ToastContainer
         position="bottom-left"
         autoClose={5000}

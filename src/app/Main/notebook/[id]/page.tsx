@@ -41,13 +41,13 @@ export default async function NotesPage({
             <div>
               <DrawnButton
                 variant="outline"
-                className="lg:flex lg:fixed   hidden   items-center  gap-2 top-12 right-8 z-40"
+                className="lg:flex lg:fixed hidden items-center gap-2 top-12 right-8 z-40"
               >
                 Criar Nota <Plus size={16} />
               </DrawnButton>
               <DrawnButton
                 variant="outline"
-                className="fixed  flex  lg:hidden  items-center   py-[0.5rem] px-[0.5rem] right-8 top-12 z-40 rounded-full"
+                className="fixed flex lg:hidden items-center py-[0.5rem] px-[0.5rem] right-8 top-12 z-40 rounded-full"
               >
                 <Plus size={16} />
               </DrawnButton>
@@ -114,11 +114,40 @@ export default async function NotesPage({
       )}
 
       {/* Seção de Notas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-4 lg:gap-0">
-        {data.notes.map((note) => (
-          <NoteCard {...note} key={note.id} />
-        ))}
-      </div>
+      {data.notes.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0">
+          {data.notes.map((note) => (
+            <NoteCard {...note} key={note.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center h-[70vh] text-center">
+          <img
+            src="/images/no-notes.gif"
+            alt="No notes available"
+            className="w-48 h-48 mb-4"
+          />
+          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-500">
+            Nenhuma nota encontrada.
+          </p>
+          <p className="text-lg text-gray-400 mt-2">
+            Comece criando uma nova nota para este caderno!
+          </p>
+          <div className="mt-6">
+            <DialogNewNote
+              NoteBookId={data.notebook?.id as string}
+              trigger={
+                <DrawnButton
+                  variant="primary"
+                  className="flex items-center gap-2"
+                >
+                  Criar Nota <Plus size={18} />
+                </DrawnButton>
+              }
+            />
+          </div>
+        </div>
+      )}
 
       {/* Toast para Notificações */}
       <ToastContainer
