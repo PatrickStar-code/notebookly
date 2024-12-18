@@ -60,6 +60,8 @@ model NoteModel {
   image      String 
   Emotion    NoteEmotion
   createdAt  DateTime      @default(now())
+content      String        @default("")       // Campo para armazenar o conteúdo HTML
   updatedAt  DateTime      @default(now()) @updatedAt
   notebook   NotebookModel @relation(fields: [notebookId], references: [id])
+
 }

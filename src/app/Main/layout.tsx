@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconHome, IconNewSection, IconTerminal2 } from "@tabler/icons-react";
+import { IconNote, IconNotebook } from "@tabler/icons-react";
 import { FloatingDockDemo } from "../_components/dock";
 import Sidebar from "../_components/sidebar";
 import { auth } from "@/auth";
@@ -19,32 +19,19 @@ export default async function PagesLayout({
   const infos = await getDescInfo();
   const links: ILink[] = [
     {
-      title: "Home",
+      title: "Cadernos",
       icon: (
-        <IconHome className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
+        <IconNotebook className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),
       href: "/Main",
     },
+
     {
-      title: "Products",
+      title: "Notas",
       icon: (
-        <IconTerminal2 className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
+        <IconNote className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
-    },
-    {
-      title: "Components",
-      icon: (
-        <IconNewSection className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-    {
-      title: "Settings",
-      icon: (
-        <IconNewSection className="h-full w-5 text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
+      href: "/Main/note",
     },
   ];
 
