@@ -5,6 +5,7 @@ import { FloatingDockDemo } from "../_components/dock";
 import Sidebar from "../_components/sidebar";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import getDescInfo from "../_actions/getDescInfo";
 
 export interface ILink {
   title: string;
@@ -15,6 +16,7 @@ export interface ILink {
 export default async function PagesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const infos = await getDescInfo();
   const links: ILink[] = [
     {
       title: "Home",
@@ -57,6 +59,7 @@ export default async function PagesLayout({
         links={links}
         userName={session?.user?.name ? session.user.name : "Nome Padrão"}
         userImage={session?.user?.image ? session.user.image : ""} // imagem vazia se não houver
+        infos={infos}
       />
 
       <div className="flex-grow p-6 bg-gray-100 dark:bg-gray-700 overflow-y-auto">

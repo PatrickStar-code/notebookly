@@ -22,6 +22,6 @@ export default async function EditNotebook(data: FormDataEdit & { NotebookId: st
             id: data.NotebookId,
         },
     });
-    revalidatePath("/main");
+    revalidatePath("/Main");
     return notebook;
 }

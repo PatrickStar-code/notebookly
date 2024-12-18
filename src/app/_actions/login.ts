@@ -21,5 +21,5 @@ export default async function login(formData: FormDataLogin) {
         }
     }
 
-    redirect("/main");
+    redirect("/Main");
 }

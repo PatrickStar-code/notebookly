@@ -15,6 +15,6 @@ export default async function DeleteNotebook(notebookId: string) {
     },
   });
 
-  revalidatePath("/main");
+  revalidatePath("/Main");
   return { notebook, notes };
 }

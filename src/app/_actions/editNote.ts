@@ -27,6 +27,6 @@ export default async function EditNote(data: FormDataEditNote & { NotebookId: st
             id: data.NotebookId,
         },
     });
-    revalidatePath("/main");
+    revalidatePath("/Main");
     return notebook;
 }

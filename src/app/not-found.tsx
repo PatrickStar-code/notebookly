@@ -55,7 +55,7 @@ export default function Custom404() {
             >
               <Link href={"/Main"}>
                 <DrawnButton className="p-4">
-                  Voltar para a página anterior
+                  Voltar para a página principal
                 </DrawnButton>
               </Link>
             </motion.div>

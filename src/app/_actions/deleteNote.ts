@@ -8,6 +8,6 @@ export default async function DeleteNote(noteId: string) {
             id: noteId,
         },
     });
-    revalidatePath("/main");
+    revalidatePath("/Main");
     return note;
 }

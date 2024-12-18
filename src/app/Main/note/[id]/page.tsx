@@ -1,21 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic"; // Importação dinâmica para evitar problemas de SSR com Quill
+import dynamic from "next/dynamic";
 
-// Carregar o Quill de forma dinâmica (para evitar problemas no SSR)
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css"; // Importar o tema "snow" do Quill
-import "react-quill/dist/quill.bubble.css"; // Importar o tema "bubble" do Quill
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 
 export default function NotesPage({ params }: { params: { id: string } }) {
   const [editorValue, setEditorValue] = useState<string>("");
+  const [isClient, setIsClient] = useState(false);
 
-  const handleEditorChange = (value: string) => {
-    setEditorValue(value);
-  };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleEditorChange = (value: string) => setEditorValue(value);
+
+  const handleSave = () => console.log("Conteúdo salvo:", editorValue);
+
+  const handleCancel = () => setEditorValue("");
 
   return (
     <motion.div
@@ -40,27 +46,32 @@ export default function NotesPage({ params }: { params: { id: string } }) {
         </header>
 
         <div className="space-y-6">
-          {/* Caixa de texto para o título */}
-
-          {/* Área para o editor Quill */}
           <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-sm border-2 border-gray-300 dark:border-gray-600">
             <label className="block text-gray-900 dark:text-gray-300 font-semibold">
               Conteúdo
             </label>
-            <ReactQuill
-              value={editorValue}
-              onChange={handleEditorChange}
-              theme="bubble"
-              className="w-full bg-transparent text-gray-900 dark:text-white p-2 rounded-md border-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-700"
-            />
+            {isClient && (
+              <ReactQuill
+                value={editorValue}
+                onChange={handleEditorChange}
+                theme="snow"
+                className="w-full bg-transparent text-gray-900 dark:text-white p-2 rounded-md border-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-700"
+                aria-label="Editor de texto para adicionar conteúdo"
+              />
+            )}
           </div>
 
-          {/* Botões de ação */}
           <div className="flex space-x-4 justify-end mt-6">
-            <Button className="bg-indigo-500 text-white hover:bg-indigo-400 transition dark:bg-indigo-700 dark:hover:bg-indigo-600">
+            <Button
+              onClick={handleSave}
+              className="bg-indigo-500 text-white hover:bg-indigo-400 transition dark:bg-indigo-700 dark:hover:bg-indigo-600"
+            >
               Salvar
             </Button>
-            <Button className="bg-gray-600 text-white hover:bg-gray-500 transition dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400">
+            <Button
+              onClick={handleCancel}
+              className="bg-gray-600 text-white hover:bg-gray-500 transition dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400"
+            >
               Cancelar
             </Button>
           </div>

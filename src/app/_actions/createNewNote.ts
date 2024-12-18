@@ -25,6 +25,6 @@ export default async function CreateNewNote(data: FormDataNewNote & { NotebookId
         },
     });
 
-    revalidatePath("/main");
+    revalidatePath("/Main");
     return notebook;
 }

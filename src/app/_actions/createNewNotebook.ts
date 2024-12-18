@@ -19,6 +19,6 @@ export default async function CreateNewNotebook(data: FormDataNewNotebook) {
             image: data.image || "",
         },
     });
-    revalidatePath("/main");
+    revalidatePath("/Main");
     return notebook;
 }
