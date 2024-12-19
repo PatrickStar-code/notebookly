@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import DrawnButton from "../_components/drawnButton";
 import NotebookCard from "../_components/cardNotebook";
+import Image from "next/image";
 
 export default async function Home() {
   const session = await auth();
@@ -55,15 +56,17 @@ export default async function Home() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-[70vh] text-center">
-          <img
-            src="/images/empty.gif"
+          <Image
+            src="/empty.svg"
             alt="No notebooks"
             className="w-48 h-48 mb-4"
+            width={96}
+            height={96}
           />
-          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-500">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-black dark:text-gray-400">
             Nenhum caderno encontrado.
           </p>
-          <p className="text-lg text-gray-400 mt-2">
+          <p className="text-lg text-black dark:text-gray-400 mt-2 ">
             Que tal criar o seu primeiro caderno agora?
           </p>
           <div className="mt-6">

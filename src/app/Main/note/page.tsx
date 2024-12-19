@@ -7,6 +7,7 @@ import { emotionTranslations } from "@/app/_constants/emotion";
 import getAllNotes from "@/app/_actions/getAllNotes";
 import { NoteModel } from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function AllNotesPage({}) {
   const data: NoteModel[] = await getAllNotes();
@@ -92,15 +93,17 @@ export default async function AllNotesPage({}) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-[70vh] text-center">
-          <img
-            src="/images/no-notes.gif"
-            alt="No notes available"
+          <Image
+            src="/empty.svg"
+            alt="No notebooks"
             className="w-48 h-48 mb-4"
+            width={96}
+            height={96}
           />
-          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-500">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-medium   text-black dark:text-gray-400">
             Nenhuma nota encontrada.
           </p>
-          <p className="text-lg text-gray-400 mt-2">
+          <p className="text-lg text-black dark:text-gray-4000 mt-2 ">
             Comece criando um caderno e crie uma nota para comecar!
           </p>
           <div className="mt-6">

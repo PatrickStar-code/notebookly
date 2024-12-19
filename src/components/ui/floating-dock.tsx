@@ -5,6 +5,12 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./tooltip";
 
 export const FloatingDock = ({
   items,
@@ -33,14 +39,24 @@ const FloatingDockMobile = ({
       {items.map((item) => (
         <IconContainer key={item.title} {...item} />
       ))}
-      <div
-        className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
-        onClick={() => {
-          logout();
-        }}
-      >
-        <LogOutIcon size={16} />
-      </div>{" "}
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <LogOutIcon size={16} />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="cursor-pointer bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+            <p>Logout</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </motion.div>
   );
 };
@@ -55,10 +71,19 @@ function IconContainer({
   href: string;
 }) {
   return (
-    <Link href={href}>
-      <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800">
-        {icon}
-      </div>
-    </Link>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link href={href}>
+            <div className="h-10 w-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800">
+              {icon}
+            </div>
+          </Link>
+        </TooltipTrigger>
+        <TooltipContent className="cursor-pointer bg-gray-200 text-black dark:bg-gray-700 dark:text-white">
+          <p>{title}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }

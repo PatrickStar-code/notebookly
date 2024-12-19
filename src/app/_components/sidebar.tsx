@@ -86,6 +86,11 @@ export default function Sidebar({
             Últimos Cadernos Criados
           </h3>
           <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-xs">
+            {infos.notebooks.length === 0 && (
+              <li className="p-2 rounded-lg transition-colors duration-300 hover:bg-blue-100 dark:hover:bg-gray-600 hover:text-blue-700 dark:hover:text-blue-300">
+                Nenhum caderno criado
+              </li>
+            )}
             {infos.notebooks.slice(0, 3).map((notebook) => (
               <Link key={notebook.id} href={`/Main/notebook/${notebook.id}`}>
                 <li
@@ -106,7 +111,12 @@ export default function Sidebar({
             Últimas Notas Criadas
           </h3>
           <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-xs">
-            {infos.notes.slice(0, 3).map((note) => (
+            {infos.notes.length === 0 && (
+              <li className="p-2 rounded-lg  transition-colors duration-300 hover:bg-blue-100 dark:hover:bg-gray-600 hover:text-blue-700 dark:hover:text-blue-300">
+                Nenhuma nota criada
+              </li>
+            )}
+            {infos.notes.map((note) => (
               <Link key={note.id} href={`/Main/note/${note.id}`}>
                 <li
                   className={`truncate p-2 rounded-lg cursor-pointer transition-colors duration-300 ${

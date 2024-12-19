@@ -1,7 +1,6 @@
 import React from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
-
-import { ILink } from "../main/layout";
+import { ILink } from "../Main/layout";
 
 export function FloatingDockDemo({ links }: { links: ILink[] }) {
   return (

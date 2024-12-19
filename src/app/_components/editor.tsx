@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -10,6 +10,7 @@ import { NoteModel } from "@prisma/client";
 import DrawnButton from "./drawnButton";
 import saveContentNote from "../_actions/saveContentNote";
 import { toast } from "react-toastify";
+
 export default function Editor(note: NoteModel) {
   const [editorValue, setEditorValue] = useState<string>(note.content);
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,32 +35,55 @@ export default function Editor(note: NoteModel) {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Verifica se Ctrl (ou Cmd no Mac) e S foram pressionados
+      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+        event.preventDefault(); // Impede o comportamento padrão de salvar a página
+        handleSave(); // Chama a função de salvar
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [editorValue]); // Atualiza sempre que o editorValue mudar
+
   return (
     <motion.div
       className="w-full max-w-4xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl border-4 border-gray-300 dark:border-gray-600"
+      style={{
+        backgroundImage: `repeating-linear-gradient(
+      #ffffff, #ffffff 39px, 
+      #e3e7ee 40px
+    )`,
+        backgroundSize: "100% 40px",
+        backgroundPosition: "top left",
+      }}
       initial={{ y: -50 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <header className="text-center mb-6">
-        <h1 className="text-3xl font-semibold text-indigo-400 border-b-2 border-gray-300 dark:border-gray-600 pb-2">
+        <h1 className="text-3xl font-semibold text-gray-800 font-edu border-b-2 border-gray-300 dark:border-gray-600 pb-2">
           Nota {note.title}
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 italic">
+        <p className="text-gray-600 dark:text-gray-400 italic font-edu text-2xl">
           Aqui você pode adicionar suas anotações e muito mais...
         </p>
       </header>
 
       <div className="space-y-6">
-        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-sm border-2 border-gray-300 dark:border-gray-600">
-          <label className="block text-gray-900 dark:text-gray-300 font-semibold">
+        <div className="p-4 rounded-lg shadow-sm ">
+          <label className="block text-gray-900 dark:text-gray-900 font-semibold">
             Conteúdo
           </label>
           <ReactQuill
             value={editorValue}
             onChange={handleEditorChange}
             theme="snow"
-            className="w-full bg-transparent text-gray-900 dark:text-white p-2 rounded-md border-2 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-700"
+            className="w-full bg-transparent text-gray-900 p-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-700"
             aria-label="Editor de texto para adicionar conteúdo"
           />
         </div>
