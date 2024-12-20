@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import NoteCard from "@/app/_components/cardNote";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Notebook } from "lucide-react";
+import { Notebook, Search } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import DrawnButton from "@/app/_components/drawnButton";
 import { emotionTranslations } from "@/app/_constants/emotion";
@@ -38,15 +38,20 @@ export default function NoteContent({ data }: { data: NoteModel[] }) {
       </div>
 
       {/* Campo de busca */}
-      <div className="mt-4 mb-6">
+      <div className="mt-4 mb-6 relative">
         <input
           type="text"
           placeholder="Buscar notas..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 
+          className="w-full px-4 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 
              bg-white text-black placeholder-gray-400 border-gray-300
              dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-500 dark:border-gray-600"
+        />
+        {/* Ícone de busca */}
+        <Search
+          size={20}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
         />
       </div>
 
