@@ -4,7 +4,7 @@
 
 Notebookly é um projeto que simula um diário digital. O objetivo é permitir que o usuário crie cadernos e notas, podendo registrar seus sentimentos e pensamentos em cada nota criada.
 
-![Notebookly](lpublic/home.png)
+![Notebookly](public/home.png)
 
 ## Funcionalidades
 
