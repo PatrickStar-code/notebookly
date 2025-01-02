@@ -38,3 +38,12 @@ Notebookly é um projeto que simula um diário digital. O objetivo é permitir q
 - **Prisma CLI**: Ferramenta de linha de comando para gerenciamento de banco de dados e geração de client Prisma.
 - **PostCSS**: Ferramenta para transformar CSS com plugins, usada em conjunto com Tailwind CSS.
 - **ESLint Config Next**: Configuração do ESLint otimizada para Next.js.
+
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+`AUTH_SECRET`
+
+`DATABASE_URL`
+
