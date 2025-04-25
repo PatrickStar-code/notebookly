@@ -16,7 +16,6 @@ export interface ILink {
 export default async function PagesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const infos = await getDescInfo();
   const links: ILink[] = [
     {
       title: "Cadernos",
@@ -36,6 +35,8 @@ export default async function PagesLayout({
   ];
 
   const session = await auth();
+  const infos = await getDescInfo(session?.user?.id as string);
+
   if (!session) {
     return redirect("/");
   }

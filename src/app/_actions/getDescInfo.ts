@@ -2,19 +2,23 @@
 
 import db from "@/lib/db";
 
-export default async function getDescInfo() {
+export default async function getDescInfo(sessionId: string) {
     const notes = await db.noteModel.findMany({
         orderBy: {
             createdAt: "desc",
         },
-        take: 5
+        take: 5,
+        where: {
+            id: sessionId
+        }
     });
 
     const notebooks = await db.notebookModel.findMany({
         orderBy: {
             createdAt: "desc",
         },
-        take: 5
+        take: 5,
+        where: { id: sessionId },
 
     });
 
