@@ -26,6 +26,6 @@ export default async function registerUser(data: FormDataRegister) {
 
 
     } catch (error) {
-        if (error instanceof Error) console.error(error.message);
+        if (error instanceof Error) console.error("E-mail já cadastrado.");
     }
 }
