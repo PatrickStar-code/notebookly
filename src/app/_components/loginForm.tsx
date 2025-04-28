@@ -43,22 +43,32 @@ export default function LoginForm() {
       setLoading(true);
 
       const validatedData = await schema.parseAsync(data);
-      await Login(validatedData);
+
+      const response = await Login(validatedData);
+
+      if (response?.error) {
+        toast.error(response.error, {
+          position: "bottom-left",
+          theme: isDark ? "dark" : "light",
+        });
+        return;
+      }
+
       toast.success("Login efetuado com sucesso!", {
         theme: isDark ? "dark" : "light",
       });
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorMessage =
         error instanceof z.ZodError
-          ? error.errors.map((err) => err.message).join(", ") // Combina as mensagens de erro do Zod
+          ? error.errors.map((err) => err.message).join(", ")
           : error.message || "Ocorreu um erro inesperado";
       toast.error(errorMessage, {
         position: "bottom-left",
         theme: isDark ? "dark" : "light",
       });
     } finally {
-      // Sempre para o estado de carregamento
       setLoading(false);
       reset();
     }

@@ -44,7 +44,7 @@ export default function Sidebar({
             alt="Imagem do usuário"
             width={48}
             height={48}
-            className="rounded-full"
+            className="rounded-full object-cover h-12 w-12"
           />
         ) : (
           <div className="w-12 h-12 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center">

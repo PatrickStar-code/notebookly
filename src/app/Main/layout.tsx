@@ -35,6 +35,7 @@ export default async function PagesLayout({
   ];
 
   const session = await auth();
+  console.log(session);
   const infos = await getDescInfo(session?.user?.id as string);
 
   if (!session) {

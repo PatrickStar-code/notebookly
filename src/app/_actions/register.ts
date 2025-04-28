@@ -11,25 +11,17 @@ export default async function registerUser(data: FormDataRegister) {
         where: { email },
     });
 
-
     if (existingUser) {
-        throw new Error("E-mail já cadastrado.");
+        return { success: false, error: "Email já cadastrado." };
     }
 
+    const user = await db.userModel.create({
+        data: { name, email, password, image },
+    });
 
-    try {
-
-
-        const user = await db.userModel.create({
-            data: { name, email, password, image },
-        });
-
-
-        if (!user) throw new Error("Erro ao cadastrar o usuário.");
-        redirect("/");
-
-
-    } catch (error) {
-        if (error instanceof Error) console.error("Error creating user:", error.message);
+    if (!user) {
+        return { success: false, error: "Erro ao cadastrar o usuário." };
     }
+
+    redirect("/");
 }

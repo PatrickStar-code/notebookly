@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use server";
 
 import { signIn } from "@/auth";
@@ -10,15 +11,15 @@ export default async function login(formData: FormDataLogin) {
     const password = formData.password;
 
     try {
-        await signIn("credentials", {
+        const result = await signIn("credentials", {
             email,
             password,
+            redirect: false, // <- muito importante
         });
+
+
     } catch (e) {
-        console.error(e);
-        if (e instanceof AuthError && e.type === "CredentialsSignin") {
-            throw new Error("Credenciais inválidas");
-        }
+        return { success: false, error: "Erro desconhecido" };
     }
 
     redirect("/Main");

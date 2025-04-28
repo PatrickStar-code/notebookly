@@ -50,12 +50,22 @@ export default function RegisterForm() {
 
   const Submit = async (data: FormDataRegister) => {
     const isDark = document.documentElement.classList.contains("dark");
-
     try {
       setLoading(true);
+
       const validatedData = await schema.parseAsync(data);
       validatedData.password = hashSync(validatedData.password, 10);
-      await registerUser(validatedData);
+
+      const response = await registerUser(validatedData);
+
+      if (response?.error) {
+        toast.error(response.error, {
+          position: "bottom-left",
+          theme: isDark ? "dark" : "light",
+        });
+        return; // Interrompe o fluxo caso haja erro
+      }
+
       toast.success("Cadastro efetuado com sucesso!", {
         theme: isDark ? "dark" : "light",
       });
@@ -64,8 +74,9 @@ export default function RegisterForm() {
     } catch (error: any) {
       const errorMessage =
         error instanceof z.ZodError
-          ? error.errors.map((err) => err.message).join(", ") // Combina as mensagens de erro do Zod
+          ? error.errors.map((err) => err.message).join(", ")
           : error.message || "Ocorreu um erro inesperado";
+
       toast.error(errorMessage, {
         position: "bottom-left",
         theme: isDark ? "dark" : "light",
