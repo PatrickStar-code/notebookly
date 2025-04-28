@@ -12,11 +12,13 @@ export default async function registerUser(data: FormDataRegister) {
     });
 
 
+    if (existingUser) {
+        throw new Error("E-mail já cadastrado.");
+    }
+
 
     try {
-        if (existingUser) {
-            throw new Error("E-mail já cadastrado.");
-        }
+
 
         const user = await db.userModel.create({
             data: { name, email, password, image },

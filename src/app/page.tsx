@@ -29,19 +29,11 @@ export default async function Login() {
 
             <div className="flex justify-evenly items-center space-x-2 w-full mt-4">
               <span className="bg-gray-300 h-px flex-grow"></span>
-              <span className="uppercase text-xs text-gray-400 font-semibold">
-                ou
-              </span>
-              <span className="bg-gray-300 h-px flex-grow"></span>
             </div>
-
-            <button className="mt-4 flex items-center justify-center text-xs text-blue-900 font-semibold">
-              <span>Entrar com o Google</span>
-            </button>
 
             <DialogResetPassword
               trigger={
-                <p className="text-xs text-blue-900 mt-4 cursor-pointer">
+                <p className="text-[.8rem] text-blue-900 text- hover:underline mt-4 cursor-pointer">
                   Esqueceu a senha?
                 </p>
               }

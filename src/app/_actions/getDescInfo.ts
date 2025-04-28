@@ -9,7 +9,7 @@ export default async function getDescInfo(sessionId: string) {
         },
         take: 5,
         where: {
-            id: sessionId
+
         }
     });
 

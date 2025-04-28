@@ -86,21 +86,21 @@ export default function RegisterForm() {
           }`}
           id="usuario"
           {...register("user")}
-          placeholder="Usuario"
+          placeholder="Usuario*"
           type="text"
           required
         />
         <input
           autoFocus
           className={`text-xs w-full mb-2  bg-white px-2 py-2 rounded-[0.4em] border-2 border-black font-bold text-gray-700 shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-[0.15em_0.15em] focus:translate-x-[-0.05em] focus:translate-y-[-0.05em] hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em] ${
-            errors.user ? "border-red-500" : "border-black"
+            errors.image ? "border-red-500" : "border-black"
           }`}
           id="imagem"
           {...register("image")}
-          placeholder="Url;"
+          placeholder="Image Url"
           type="text"
-          required
         />
+
         <input
           autoFocus
           className={`text-xs w-full mb-2  bg-white px-2 py-2 rounded-[0.4em] border-2 border-black font-bold text-gray-700 shadow-[0.1em_0.1em] transition-all duration-100 ease-in-out focus:outline-none focus:shadow-[0.15em_0.15em] focus:translate-x-[-0.05em] focus:translate-y-[-0.05em] hover:shadow-[0.15em_0.15em] hover:translate-x-[-0.05em] hover:translate-y-[-0.05em] active:shadow-[0.05em_0.05em] active:translate-x-[0.05em] active:translate-y-[0.05em] ${
@@ -108,7 +108,7 @@ export default function RegisterForm() {
           }`}
           id="email"
           {...register("email")}
-          placeholder="Email"
+          placeholder="Email*"
           type="email"
           required
         />
@@ -117,7 +117,7 @@ export default function RegisterForm() {
             errors.password ? "border-red-500" : "border-black"
           }`}
           id="password"
-          placeholder="Senha"
+          placeholder="Senha*"
           type="password"
           {...register("password")}
           required
@@ -135,6 +135,9 @@ export default function RegisterForm() {
 
         {errors.email && (
           <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>
+        )}
+        {errors.image && (
+          <p className="text-red-500 text-sm mt-2">{errors.image.message}</p>
         )}
 
         {errors.password && (

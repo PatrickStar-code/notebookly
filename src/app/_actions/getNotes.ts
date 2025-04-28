@@ -10,6 +10,7 @@ export default async function getNotesAndNameNoteboock(noteId: string) {
         orderBy: {
             createdAt: "desc",
         },
+
     });
 
     const notebook = await db.notebookModel.findUnique({
